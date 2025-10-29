@@ -7,7 +7,16 @@ public class LeitorArquivo {
         ) {
             while (arquivo.ready()) {
                 String linha = arquivo.readLine();
-                mostrarDevagar(linha);
+
+                if(linha.equals("[PAUSE]")){
+                    System.out.print("\n(Pressione ENTER para continuar...)");
+                    Teclado.getUmString();
+                    System.out.println();
+                } else if (linha.equals("[CLEAR]")){
+                    limparTela();
+                } else {
+                    mostrarDevagar(linha,30);
+                }
 
             }
         } catch (FileNotFoundException e) {
@@ -18,11 +27,21 @@ public class LeitorArquivo {
         }
     }
 
-    private static void mostrarDevagar(String texto) {
+    public void mostrarDevagar(String texto, long delay) {
         for (char c : texto.toCharArray()) {
             System.out.print(c);
-            try { Thread.sleep(25); } catch (InterruptedException ignored) {}
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException ignored) {
+                Thread.currentThread().interrupt();
+            }
         }
         System.out.println();
+    }
+
+    public void limparTela(){
+        for(int i = 0; i < 50; i++){
+            System.out.println();
+        }
     }
 }
