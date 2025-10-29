@@ -37,3 +37,11 @@ public class Jogo {
         return personagemJogador;
     }
 }
+public void main(String[] args) {
+    try {
+        Jogo jogo = new Jogo();
+        jogo.iniciarJogo();
+
+    } catch (Exception e) {
+        System.out.println("Erro: " + e.getMessage());
+        }}
