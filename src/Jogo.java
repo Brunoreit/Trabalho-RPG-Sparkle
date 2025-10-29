@@ -9,11 +9,13 @@ public class Jogo {
         System.out.print("Digite o nome do seu personagem: ");
         String nomeJogador = Teclado.getUmString();
 
-        System.out.println("[ 1 ] Guerreiro\n" +
-                "\n" +
-                "[ 2 ] Mago\n" +
-                "\n" +
-                "[ 3 ] Arqueiro\n");
+        System.out.println("""
+                [ 1 ] Guerreiro
+                
+                [ 2 ] Mago
+                
+                [ 3 ] Arqueiro
+                """);
         System.out.print("\nDigite sua escolha: ");
         String escolha = Teclado.getUmString();
 
@@ -36,12 +38,14 @@ public class Jogo {
     public Personagem getPersonagemJogador() {
         return personagemJogador;
     }
-}
-public void main(String[] args) {
-    try {
-        Jogo jogo = new Jogo();
-        jogo.iniciarJogo();
 
-    } catch (Exception e) {
-        System.out.println("Erro: " + e.getMessage());
-        }}
+    public static void main(String[] args) {
+        try {
+            Jogo jogo = new Jogo();
+            jogo.iniciarJogo();
+
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }
+}
