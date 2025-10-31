@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public abstract class Personagem {
     private String nome;
     private int pontosVida;
@@ -6,18 +8,35 @@ public abstract class Personagem {
     private int defesa;
     private int nivel;
     private Inventario inventario;
+    private int experiencia;
+    private int experienciaProximoNivel;
+
 
     public Personagem(String nome, int pontosVida, int ataque, int defesa, int nivel, Inventario inventario) throws Exception{
-        this.setNome(nome);  // ← MUDOU DE getNome() PARA setNome()
+        this.setNome(nome);
         this.setPontosVida(pontosVida);
         this.pontosVidaMaximo = pontosVida;
         this.setAtaque(ataque);
         this.setDefesa(defesa);
         this.setNivel(nivel);
         this.setInventario(inventario);
+        this.nivel = 1;
+        this.experiencia = 0;
+        this.experienciaProximoNivel = 100;
     }
 
-    // SETTER para o nome (era getNome, agora é setNome)
+    public Personagem (Personagem outro) {
+        this.nome = outro.nome;
+        this.pontosVida = outro.pontosVida;
+        this.ataque = outro.ataque;
+        this.defesa = outro.defesa;
+        this.nivel = outro.nivel;
+        this.experiencia = outro.experiencia;
+        this.experienciaProximoNivel = 100;
+        this.inventario = outro.inventario;
+
+    }
+
     public void setNome(String nome) throws Exception{
         if (nome == null) throw new Exception("Nome não pode ser nulo!");
 
@@ -43,7 +62,7 @@ public abstract class Personagem {
         this.nome = nome;
     }
 
-    // GETTER para o nome (retorna o valor)
+
     public String getNome() {
         return nome;
     }
@@ -88,5 +107,72 @@ public abstract class Personagem {
 
     public Inventario getInventario(){
         return inventario;
+    }
+
+    public int getExperiencia() {return experiencia;}
+
+    public int getExperienciaProximoNivel() {return experienciaProximoNivel-experiencia;}
+
+    public boolean ganharExperiencia(int xp) {
+        this.experiencia += xp;
+
+        if (this.experiencia >= this.experienciaProximoNivel) {
+            subirNivel();
+            return true;
+        }
+        return false;
+    }
+
+    private void subirNivel() {
+        this.nivel++;
+        this.experiencia -= this.experienciaProximoNivel;
+        this.pontosVidaMaximo += nivel * 5;
+        this.pontosVida = this.pontosVidaMaximo;
+        this.ataque += nivel * 2;
+        this.defesa += nivel;
+        this.experienciaProximoNivel = 100 * nivel;
+        System.out.println("Subiu de nivel! Novo nivel: " + this.nivel);
+    }
+
+    public void curar(int quantidade) {
+        this.pontosVida += quantidade;
+        if (this.pontosVida > pontosVidaMaximo) {
+            this.pontosVida = pontosVidaMaximo;
+        }
+    }
+
+    @Override
+    public String toString() {
+        {
+            String status = "--- STATUS: " + this.getNome() + " ---\n" +
+                    " Classe: " + this.getClass().getSimpleName() + "\n" +
+                    " Nível:  " + this.getNivel() + "\n" +
+                    " HP:     " + this.getPontosVida() + "\n" +
+                    " Ataque: " + this.getAtaque() + "\n" +
+                    " Defesa: " + this.getDefesa();
+            return status;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getNome().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Personagem outro = (Personagem) obj;
+        return this.getNome().equals(outro.getNome());
+    }
+
+    @Override
+    public Personagem clone(){
+        try {
+            return (Personagem) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Erro ao clonar personagem", e);
+        }
     }
 }

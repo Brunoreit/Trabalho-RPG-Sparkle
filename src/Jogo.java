@@ -89,7 +89,7 @@ public class Jogo {
                     } else {
                         leitor.lerArquivo("historia/missao1_taverna.txt");
 
-                        Item paoDeMel = new Item("Pão de mel","Um pão doce que restaura 5 HP.", "cura", 1);
+                        Item paoDeMel = new Item("Pão de mel","Um pão doce que restaura 5 HP.", "cura", 5);
                         personagemJogador.getInventario().adicionarItem(paoDeMel);
 
                         leitor.mostrarDevagar("Você ganhou 1x Pão de mel!",50);
@@ -133,11 +133,11 @@ public class Jogo {
 
         leitor.lerArquivo("historia/missao1_conversa_Nissin.txt");
 
-        Item pocao = new Item("Poção de Cura", "Restaura 20 HP.", "cura_20", 2);
+        Item pocao = new Item("Poção de Cura", "Restaura 20 HP.", "cura_20", 20);
         personagemJogador.getInventario().adicionarItem(pocao);
         leitor.mostrarDevagar("Você recebeu 2x Poção de Cura!", 30);
 
-        Item tubo_ensaio = new Item("Tubo de ensaio","Um tubo feito de vidro que pode guardar líquidos e essências","Armazenamento",1);
+        Item tubo_ensaio = new Item("Tubo de ensaio","Um tubo feito de vidro que pode guardar líquidos e essências","Armazenamento",0);
         personagemJogador.getInventario().adicionarItem(tubo_ensaio);
         leitor.mostrarDevagar("Você recebeu 1x Tubo de ensaio!", 30);
 
@@ -198,7 +198,6 @@ public class Jogo {
                         Teclado.getUmString();
 
                         momentoEscolha2 = false;
-                        break;
                     } else {
 
                         int faltam = 2 - amostrasColetadas;
@@ -210,8 +209,8 @@ public class Jogo {
 
                         System.out.print("\n(Pressione ENTER para continuar...)");
                         Teclado.getUmString();
-                        break;
                     }
+                    break;
                 case "2":
                     gerenciarInventario();
                     break;
@@ -244,7 +243,7 @@ public class Jogo {
             return;
         }
 
-        inv.listarItens();
+        inv.mostrarItens();
         System.out.print("\nDeseja usar um item? (Digite o número ou 0 para voltar): ");
 
         String escolhaItem = Teclado.getUmString();
@@ -264,7 +263,7 @@ public class Jogo {
             if (item != null) {
                 item.usar(personagemJogador);
 
-                inv.removerItem(indice);
+                inv.removerItem(item);
 
                 leitor.mostrarDevagar("Item " + item.getNome() + " usado com sucesso!", 30);
 

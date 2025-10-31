@@ -1,4 +1,4 @@
-public class Item {
+public class Item implements Comparable<Item> {
     private String nome;
     private String descricao;
     private String efeito; // CURA, ATAQUE, DEFESA, CURA_COMPLETA
@@ -11,7 +11,6 @@ public class Item {
         this.setValor(valor);
     }
 
-    // ===== SETTERS COM VALIDAÇÃO =====
 
     public void setNome(String nome) {
         if (nome != null && !nome.isBlank()) {
@@ -61,46 +60,29 @@ public class Item {
         return this.valor;
     }
 
-    // ===== MÉTODOS DE COMBATE =====
-
-    /**
-     * Aplica o efeito do item no personagem durante o combate
-     * @param personagem O personagem que usará o item
-     * @return true se o item foi usado com sucesso, false caso contrário
-     */
     public boolean usar(Personagem personagem) {
         if (efeito == null || personagem == null) {
             return false;
         }
 
-        switch (efeito) {
-            case "CURA":
-                return usarCura(personagem);
-
-            case "CURA_COMPLETA":
-                return usarCuraCompleta(personagem);
-
-            case "ATAQUE":
-                return usarAumentoAtaque(personagem);
-
-            case "DEFESA":
-                return usarAumentoDefesa(personagem);
-
-            default:
-                System.out.println("❌ Efeito desconhecido: " + efeito);
-                return false;
-        }
+        return switch (efeito) {
+            case "CURA" -> usarCura(personagem);
+            case "CURA_COMPLETA" -> usarCuraCompleta(personagem);
+            case "ATAQUE" -> usarAumentoAtaque(personagem);
+            case "DEFESA" -> usarAumentoDefesa(personagem);
+            default -> {
+                System.out.println("Efeito desconhecido: " + efeito);
+                yield false;
+            }
+        };
     }
 
-    /**
-     * Cura o personagem baseado no valor do item
-     */
     private boolean usarCura(Personagem personagem) {
         int vidaAntes = personagem.getPontosVida();
         int vidaMaxima = personagem.getPontosVidaMaximo();
 
         if (vidaAntes >= vidaMaxima) {
-            System.out.println("❌ Sua vida já está no máximo!");
+            System.out.println("Sua vida já está no máximo!");
             return false;
         }
 
@@ -108,82 +90,63 @@ public class Item {
         personagem.setPontosVida(novaVida);
         int vidaCurada = novaVida - vidaAntes;
 
-        System.out.println("💚 " + personagem.getNome() + " recuperou " + vidaCurada + " HP!");
+        System.out.println(personagem.getNome() + " recuperou " + vidaCurada + " HP!");
         return true;
     }
 
-    /**
-     * Cura completamente o personagem
-     */
+
     private boolean usarCuraCompleta(Personagem personagem) {
         int vidaAntes = personagem.getPontosVida();
         int vidaMaxima = personagem.getPontosVidaMaximo();
 
         if (vidaAntes >= vidaMaxima) {
-            System.out.println("❌ Sua vida já está no máximo!");
+            System.out.println("Sua vida já está no máximo!");
             return false;
         }
 
         personagem.setPontosVida(vidaMaxima);
         int vidaCurada = vidaMaxima - vidaAntes;
 
-        System.out.println("✨ " + personagem.getNome() + " teve sua vida completamente restaurada! (+" + vidaCurada + " HP)");
+        System.out.println(personagem.getNome() + " teve sua vida completamente restaurada! (+" + vidaCurada + " HP)");
         return true;
     }
 
-    /**
-     * Aumenta o ataque do personagem
-     */
+
     private boolean usarAumentoAtaque(Personagem personagem) {
         int ataqueAntes = personagem.getAtaque();
         personagem.setAtaque(ataqueAntes + valor);
 
-        System.out.println("⚔️ " + personagem.getNome() + " teve seu ataque aumentado em " + valor + "!");
+        System.out.println(personagem.getNome() + " teve seu ataque aumentado em " + valor + "!");
         System.out.println("   Ataque: " + ataqueAntes + " → " + personagem.getAtaque());
         return true;
     }
 
-    /**
-     * Aumenta a defesa do personagem
-     */
+
     private boolean usarAumentoDefesa(Personagem personagem) {
         int defesaAntes = personagem.getDefesa();
         personagem.setDefesa(defesaAntes + valor);
 
-        System.out.println("🛡️ " + personagem.getNome() + " teve sua defesa aumentada em " + valor + "!");
+        System.out.println( personagem.getNome() + " teve sua defesa aumentada em " + valor + "!");
         System.out.println("   Defesa: " + defesaAntes + " → " + personagem.getDefesa());
         return true;
     }
 
-    // ===== MÉTODOS AUXILIARES =====
 
-    /**
-     * Retorna uma descrição resumida do efeito
-     */
     public String getEfeitoDescricao() {
-        switch (efeito) {
-            case "CURA":
-                return "Recupera " + valor + " HP";
-            case "CURA_COMPLETA":
-                return "Restaura toda a vida";
-            case "ATAQUE":
-                return "Aumenta ataque em " + valor;
-            case "DEFESA":
-                return "Aumenta defesa em " + valor;
-            default:
-                return "Efeito desconhecido";
-        }
+        return switch (efeito) {
+            case "CURA" -> "Recupera " + valor + " HP";
+            case "CURA_COMPLETA" -> "Restaura toda a vida";
+            case "ATAQUE" -> "Aumenta ataque em " + valor;
+            case "DEFESA" -> "Aumenta defesa em " + valor;
+            default -> "Efeito desconhecido";
+        };
     }
 
-    // ===== SOBRESCRITAS =====
 
-    public String getNome() {
-        return nome;
+    @Override
+    public int compareTo(Item outro) {
+        return this.getNome().compareToIgnoreCase(outro.getNome());
     }
-
-    public void usar(Personagem personagem) {
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
