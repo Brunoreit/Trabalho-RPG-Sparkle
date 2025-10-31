@@ -101,6 +101,26 @@ public class Inventario {
     public ArrayList<Item> getItens() {
         return new ArrayList<>(itens);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Inventario outro = (Inventario) obj;
+        return this.getItens().equals(outro.getItens());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getItens().hashCode();
+    }
     @Override
     public Inventario clone() {
         try {

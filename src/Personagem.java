@@ -155,6 +155,19 @@ public abstract class Personagem {
     }
 
     @Override
+    public int hashCode() {
+        return this.getNome().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Personagem outro = (Personagem) obj;
+        return this.getNome().equals(outro.getNome());
+    }
+
+    @Override
     public Personagem clone(){
         try {
             return (Personagem) super.clone();
