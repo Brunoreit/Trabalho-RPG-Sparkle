@@ -1,0 +1,22 @@
+[CLEAR]
+Você decide seguir a música e entra na taverna 'O Patinho Fofo'.
+"Um nome...no mínimo estranho" você pensa.
+[PAUSE]
+O lugar está surpreendentemente animado. Um bardo toca no canto.
+Você se senta no balcão. O taverneiro, um homem grande e barbudo, limpa um copo e o encara.
+[PAUSE]
+"Nunca te vi, primeira vez em Solaris, viajante? As coisas não estão fáceis, mas ainda tentamos sorrir."
+[PAUSE]
+"Você parece cansado da estrada. Tome, por conta da casa."
+"Pode me chamar de Barret."
+[PAUSE]
+Enquanto ele se vira para pegar sua bebida, uma mulher de cabelos louros e sorriso fácil sai da cozinha.
+[PAUSE]
+Ela caminha até você, ignorando o Barret.
+"Ora, ora, um rosto novo. E o Barret já está te assustando com essa cara feia?"
+[PAUSE]
+"Não ligue para ele" ela diz, deslizando algo pelo balcão.
+[PAUSE]
+"Pegue isso, é um mimo da casa. Mas é segredo, viu? Shhh."
+[PAUSE]
+Ela pisca para você.

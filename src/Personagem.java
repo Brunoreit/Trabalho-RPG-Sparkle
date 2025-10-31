@@ -36,7 +36,7 @@ public abstract class Personagem {
                 char proximo = nome.charAt(i + 1);
                 if(!Character.isLetter(proximo)) throw new Exception("Não pode ter separadores um seguido do outro no nome!");
             } else {
-                throw new Exception("só pode conter: letras (a-z, A-Z), espaço, hífen ou apóstrofo");
+                throw new Exception("Nome só pode conter: letras (a-z, A-Z), espaço, hífen ou apóstrofo");
             }
         }
         this.nome = nome;

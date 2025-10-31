@@ -3,15 +3,18 @@ public class Jogo {
     private Personagem personagemJogador; // Armazena o personagem escolhido
 
     public void iniciarJogo() throws Exception {
-        leitor.lerArquivo("SparkleInicio.txt");
+        leitor.lerArquivo("historia/SparkleInicio.txt");
 
-        // Pede o nome do jogador
-        System.out.print("Digite o nome do seu personagem: ");
-        String nomeJogador = Teclado.getUmString();
+        personagemJogador = null;
+        while(personagemJogador == null){
 
-        System.out.print("Qual a sua vocação?");
+            try {
+                System.out.print("Digite o nome do seu personagem: ");
+                String nomeJogador = Teclado.getUmString();
 
-        System.out.println("""
+                System.out.print("Qual a sua vocação?");
+
+                System.out.println("""
                 
                 
                 [ 1 ] Guerreiro
@@ -20,28 +23,100 @@ public class Jogo {
                 
                 [ 3 ] Arqueiro
                 """);
-        System.out.print("\nDigite sua escolha: ");
-        String escolha = Teclado.getUmString();
+                System.out.print("\nDigite sua escolha: ");
+                String escolha = Teclado.getUmString();
 
-        switch (escolha) {
-            case "1":
-                System.out.println("\nVocê escolheu ser um Guerreiro!\n");
-                personagemJogador = new Guerreiro(nomeJogador); // Passa o nome
-                break;
-            case "2":
-                System.out.println("\nVocê escolheu ser um Mago!\n");
-                personagemJogador = new Mago(nomeJogador); // Passa o nome
-                break;
-            case "3":
-                System.out.println("\nVocê escolheu ser um Arqueiro\n");
-                personagemJogador = new Arqueiro(nomeJogador); // Passa o nome
-                break;
+                switch (escolha) {
+                    case "1":
+                        System.out.println("\nVocê escolheu ser um Guerreiro!\n");
+                        personagemJogador = new Guerreiro(nomeJogador);
+                        break;
+                    case "2":
+                        System.out.println("\nVocê escolheu ser um Mago!\n");
+                        personagemJogador = new Mago(nomeJogador);
+                        break;
+                    case "3":
+                        System.out.println("\nVocê escolheu ser um Arqueiro\n");
+                        personagemJogador = new Arqueiro(nomeJogador);
+                        break;
+                    default:
+                        System.out.print("\nOpção inválida! (Pressione ENTER para tentar novamente...)");
+                        Teclado.getUmString();
+                        leitor.limparTela();
+                }
+            } catch (Exception e){
+                leitor.mostrarDevagar("\nErro: " + e.getMessage(), 30);
+                System.out.print("\n(Pressione ENTER para tentar novamente...)");
+                Teclado.getUmString();
+                leitor.limparTela();
+            }
         }
+        leitor.mostrarDevagar("Personagem criado com sucesso!", 30);
+        Thread.sleep(1500);
+        missao1();
+
     }
 
     public Personagem getPersonagemJogador() {
         return personagemJogador;
     }
+
+    public void missao1() throws Exception{
+        leitor.limparTela();
+        leitor.lerArquivo("historia/missao1_inicio.txt");
+
+        boolean momentoEscolha = true;
+        boolean foiNaTaverna = false;
+
+        while(momentoEscolha){
+            System.out.println("\nO que você deseja fazer?");
+            System.out.println("[ 1 ] Ir pela rua da esquerda (Taverna)");
+            System.out.println("[ 2 ] Ir pela rua da direita (Residencial)");
+
+            System.out.print("\nDigite sua escolha: ");
+            String escolha2 = Teclado.getUmString();
+
+            switch (escolha2){
+                case "1":
+                    if(foiNaTaverna){
+                        leitor.mostrarDevagar("\"hmmm acabei de voltar desse caminho. Melhor focar em achar Nissin por agora.\"",30);
+                    } else {
+                        leitor.lerArquivo("historia/missao1_taverna.txt");
+
+                        Item paoDeMel = new Item("Pão de mel","Um pão doce que restaura 10 HP.", "cura", 1);
+                        leitor.mostrarDevagar("Você ganhou 1x Pão de mel!",50);
+
+                        leitor.mostrarDevagar("\n\"Obrigado...\" você responde, meio envergonhado.", 30);
+
+                        System.out.print("\n(Pressione ENTER para perguntar sobre Nissin...)");
+                        Teclado.getUmString();
+
+                        leitor.mostrarDevagar("\nVocê pergunta a jovém moça sobre o endereço da carta...", 30);
+                        leitor.mostrarDevagar("Ela responde: \"Ah, a maga Nissin! Claro. Fica na Rua Residencial. Volte e pegue o caminho da direita!\"", 30);
+                        leitor.mostrarDevagar("\"Lembre-se de me visitar de vez em quando!\"",30);
+
+                        foiNaTaverna = true;
+                    }
+                    break;
+
+                case "2":
+                    leitor.lerArquivo("historia/missao1_casa_nissin.txt");
+                    momentoEscolha = false;
+                    break;
+
+                default:
+                    leitor.mostrarDevagar("Opção inválida.",30);
+                    break;
+            }
+        }
+    }
+
+
+
+
+
+
+
 
     public static void main(String[] args) throws Exception {
         Jogo jogo = new Jogo();
@@ -89,7 +164,7 @@ public class Jogo {
                     break;
 
                 default:
-                    System.out.print("\\nOpção inválida! (Pressione ENTER para tentar novamente...)");
+                    System.out.print("\nOpção inválida! (Pressione ENTER para tentar novamente...)");
                     Teclado.getUmString();
                     break;
             }

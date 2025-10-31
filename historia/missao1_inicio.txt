@@ -1,0 +1,13 @@
+[CLEAR]
+Você finalmente chega aos portões da Vila Solaris.
+[PAUSE]
+É uma vila grande, situada em uma planície ensolarada. Mas, apesar da paisagem bonita, você repara nas marcas de batalha nos muros e na pobreza das casas mais próximas.
+[PAUSE]
+Logo após os portões da cidade interna abrirem, você se depara com uma bifurcação.
+[PAUSE]
+À **esquerda**, você vê a rua principal. Há movimento, lojas, e você ouve música vindo de uma taverna. Parece um bom lugar para procurar informações
+[PAUSE]
+À **direita**, uma rua mais calma e silenciosa, com casas e jardins. Parece ser a área residencial.
+[PAUSE]
+Você aperta a carta de Nissin no bolso.
+"Onde será que ela está?"

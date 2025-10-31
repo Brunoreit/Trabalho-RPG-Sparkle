@@ -1,0 +1,11 @@
+[CLEAR]
+Você segue pela rua residencial. As casas são simples, mas bem cuidadas.
+
+Você confere o endereço na carta e encontra a casa: uma pequena moradia com um jardim de ervas medicinais na frente.
+
+Você bate na porta.
+[PAUSE]
+A porta se abre, e lá está ela. Nissin. Mais velha, com longos cabelos arroxeados e vestes de maga, mas com o mesmo sorriso que você se lembrava.
+[PAUSE]
+"Eu sabia que você viria..."
+[PAUSE]
