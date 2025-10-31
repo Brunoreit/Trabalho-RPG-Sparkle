@@ -22,16 +22,18 @@ public class Jogo {
         switch (escolha) {
             case "1":
                 System.out.println("\nVocê escolheu ser um Guerreiro!\n");
-                personagemJogador = new Guerreiro(nomeJogador); // Passa o nome
+                personagemJogador = new Guerreiro(nomeJogador,120,7,12,1);
                 break;
             case "2":
                 System.out.println("\nVocê escolheu ser um Mago!\n");
-                personagemJogador = new Mago(nomeJogador); // Passa o nome
+                personagemJogador = new Mago(nomeJogador,80,10,8,1);
                 break;
             case "3":
                 System.out.println("\nVocê escolheu ser um Arqueiro\n");
-                personagemJogador = new Arqueiro(nomeJogador); // Passa o nome
+                personagemJogador = new Arqueiro(nomeJogador,100,8,10,1);
                 break;
+            default:
+                System.out.println("\nOpção inválida! Escolha sua vocacao!\n");
         }
     }
 

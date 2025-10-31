@@ -7,10 +7,7 @@ public class Inventario {
         this.itens = new ArrayList<>();
     }
 
-    /**
-     * Adiciona um item ao inventário
-     * @param itemAdd Item a ser adicionado
-     */
+
     public void adicionarItem(Item itemAdd) {
         if (itemAdd != null) {
             itens.add(itemAdd);
@@ -20,16 +17,13 @@ public class Inventario {
         }
     }
 
-    /**
-     * Remove um item do inventário por referência
-     * @param itemR Item a ser removido
-     */
+
     public void removerItem(Item itemR) {
         if (itemR != null && itens.contains(itemR)) {
             itens.remove(itemR);
-            System.out.println("🗑️ " + itemR.getNome() + " removido do inventário!");
+            System.out.println(itemR.getNome() + " removido do inventário!");
         } else {
-            System.out.println("❌ Item não encontrado no inventário!");
+            System.out.println("Item não encontrado no inventário!");
         }
     }
 
@@ -51,14 +45,14 @@ public class Inventario {
      */
     public void listarItens() {
         if (itens.isEmpty()) {
-            System.out.println("📦 Inventário vazio.");
+            System.out.println("Inventário vazio.");
             return;
         }
 
-        System.out.println("\n📦 ITENS NO INVENTÁRIO:");
+        System.out.println("\nITENS NO INVENTÁRIO:");
         for (int i = 0; i < itens.size(); i++) {
             Item item = itens.get(i);
-            System.out.println("  • " + item.getNome());
+            System.out.println( " [ " + (i+1) + " ] " + item.getNome());
         }
         System.out.println();
     }
@@ -68,7 +62,7 @@ public class Inventario {
      */
     public void mostrarItens() {
         if (itens.isEmpty()) {
-            System.out.println("📦 Inventário vazio.");
+            System.out.println("Inventário vazio.");
             return;
         }
 
@@ -85,11 +79,11 @@ public class Inventario {
      */
     public void mostrarItensDetalhados() {
         if (itens.isEmpty()) {
-            System.out.println("📦 Inventário vazio.");
+            System.out.println("Inventário vazio.");
             return;
         }
 
-        System.out.println("\n📦 ===== INVENTÁRIO DETALHADO =====");
+        System.out.println("\n===== INVENTÁRIO DETALHADO =====");
         for (int i = 0; i < itens.size(); i++) {
             Item item = itens.get(i);
             System.out.println("\n[ " + (i + 1) + " ] " + item.getNome());
@@ -99,27 +93,17 @@ public class Inventario {
         System.out.println("===================================\n");
     }
 
-    /**
-     * Verifica se o inventário está vazio
-     * @return true se vazio, false caso contrário
-     */
+
     public boolean estaVazio() {
         return itens.isEmpty();
     }
 
-    /**
-     * Retorna a quantidade de itens no inventário
-     * @return número de itens
-     */
+
     public int quantidadeItens() {
         return itens.size();
     }
 
-    /**
-     * Retorna um item pelo índice
-     * @param indice Índice do item
-     * @return Item na posição ou null se inválido
-     */
+
     public Item getItem(int indice) {
         if (indice >= 0 && indice < itens.size()) {
             return itens.get(indice);
@@ -127,11 +111,6 @@ public class Inventario {
         return null;
     }
 
-    /**
-     * Busca um item pelo nome
-     * @param nome Nome do item a buscar
-     * @return Item encontrado ou null
-     */
     public Item buscarItem(String nome) {
         if (nome == null || nome.isBlank()) {
             return null;
@@ -145,50 +124,43 @@ public class Inventario {
         return null;
     }
 
-    /**
-     * Verifica se o inventário contém um item específico
-     * @param item Item a verificar
-     * @return true se contém, false caso contrário
-     */
-    public boolean contemItem(Item item) {
-        return itens.contains(item);
-    }
-
-    /**
-     * Verifica se o inventário contém um item pelo nome
-     * @param nome Nome do item
-     * @return true se contém, false caso contrário
-     */
     public boolean contemItem(String nome) {
         return buscarItem(nome) != null;
     }
 
-    /**
-     * Limpa todos os itens do inventário
-     */
+
     public void limparInventario() {
         itens.clear();
-        System.out.println("🗑️ Inventário limpo!");
+        System.out.println("Inventário limpo!");
     }
 
-    /**
-     * Retorna a lista de itens (para operações avançadas)
-     * @return ArrayList de itens
-     */
+    public void transferirInventario(Inventario outro) {
+        for (Item item : outro.itens) {
+            this.adicionarItem(item);
+        }
+        outro.limparInventario();
+    }
+
     public ArrayList<Item> getItens() {
-        return new ArrayList<>(itens); // Retorna uma cópia para segurança
+        return new ArrayList<>(itens);
     }
-
+    @Override
+    public Inventario clone() {
+        try {
+            return (Inventario) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Erro ao clonar inventário", e);
+        }
+    }
     @Override
     public String toString() {
+        String texto = "Inventario:\n";
         if (itens.isEmpty()) {
             return "Inventário vazio";
         }
-
-        StringBuilder sb = new StringBuilder("Inventário (" + itens.size() + " itens):\n");
-        for (Item item : itens) {
-            sb.append("  • ").append(item.getNome()).append("\n");
+        for (int i =0; i < itens.size(); i++) {
+            texto += (i+1) + " - " + itens.get(i).getNome() + "\n";
         }
-        return sb.toString();
+        return texto;
     }
 }
