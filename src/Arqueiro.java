@@ -1,6 +1,6 @@
 public class Arqueiro extends Personagem {
 
-    public Arqueiro(String nome) throws Exception{
-        super(nome,1,1,1,1, new Inventario());
+    public Arqueiro(String nome, int pontosVida, int ataque, int defesa, int nivel) throws Exception{
+        super(nome, pontosVida, ataque, defesa, nivel, new Inventario());
     }
 }

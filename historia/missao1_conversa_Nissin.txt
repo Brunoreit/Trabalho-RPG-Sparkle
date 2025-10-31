@@ -1,0 +1,17 @@
+[CLEAR]
+Ela te puxa para dentro e tranca a porta. O lugar está cheio de livros e ervas.
+[PAUSE]
+"Desculpe o mistério, mas não é seguro. As coisas pioraram muito desde que você foi embora."
+[PAUSE]
+"O vilarejo está sendo atacado. Criaturas estranhas... eles vêm da floresta."
+[PAUSE]
+"Eles parecem ser controlados. E de acordo com o que venho pesquisando,
+isso tudo tem muita semelhança com os Sete Pecados que as lendas contam."
+[PAUSE]
+"As pessoas tentam seguir com suas vidas, muitas vezes confiando piamente na guilda,
+mas nós não estamos conseguindo dar conta devido ao baixo número de protetores no momento...
+[PAUSE]
+"Eu preciso de você. Preciso que investigue a origem disso na floresta e traga duas amostras desses monstros para mim.
+Mas você precisa estar preparado."
+[PAUSE]
+"Leve isso. Você vai precisar."

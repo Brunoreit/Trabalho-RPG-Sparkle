@@ -17,6 +17,13 @@ public class Item {
     public void setEfeito(String efeito){}
     public void setQuantidade(int quantidade){}
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void usar(Personagem personagem) {
+    }
+
     @Override
     public boolean equals (Object obj){
         if (this == obj) return true;

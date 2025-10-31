@@ -2,7 +2,7 @@ public abstract class Personagem {
     private String nome;
     private int pontosVida;
     private int ataque;
-    private int defensa;
+    private int defesa;
     private int nivel;
     private Inventario inventario;
 
@@ -44,7 +44,45 @@ public abstract class Personagem {
 
     public void setPontosVida(int pontosVida){}
     public void setAtaque(int ataque){}
-    public void setDefesa(int defensa){}
+    public void setDefesa(int defesa){}
     public void setNivel(int nivel){};
-    public void setInventario(Inventario inventario){}
+
+    public void setInventario(Inventario inventario){
+        this.inventario = inventario;
+    }
+
+    public int getPontosVida(){
+        return pontosVida;
+    }
+
+    public Inventario getInventario(){
+        return inventario;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getAtaque(){
+        return ataque;
+    }
+
+    public int getDefesa(){
+        return defesa;
+    }
+
+    public int getNivel(){
+        return nivel;
+    }
+
+    @Override
+    public String toString() {
+        String status = "--- STATUS: " + this.getNome() + " ---\n" +
+                " Classe: " + this.getClass().getSimpleName() + "\n" +
+                " Nível:  " + this.getNivel() + "\n" +
+                " HP:     " + this.getPontosVida() + "\n" +
+                " Ataque: " + this.getAtaque() + "\n" +
+                " Defesa: " + this.getDefesa();
+        return status;
+    }
 }
