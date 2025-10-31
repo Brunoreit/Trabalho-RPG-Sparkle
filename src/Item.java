@@ -101,9 +101,7 @@ public class Item implements Comparable<Item> {
         return true;
     }
 
-    /**
-     * Cura completamente o personagem
-     */
+
     private boolean usarCuraCompleta(Personagem personagem) {
         int vidaAntes = personagem.getPontosVida();
         int vidaMaxima = personagem.getPontosVidaMaximo();
@@ -120,9 +118,7 @@ public class Item implements Comparable<Item> {
         return true;
     }
 
-    /**
-     * Aumenta o ataque do personagem
-     */
+
     private boolean usarAumentoAtaque(Personagem personagem) {
         int ataqueAntes = personagem.getAtaque();
         personagem.setAtaque(ataqueAntes + valor);
@@ -132,14 +128,12 @@ public class Item implements Comparable<Item> {
         return true;
     }
 
-    /**
-     * Aumenta a defesa do personagem
-     */
+
     private boolean usarAumentoDefesa(Personagem personagem) {
         int defesaAntes = personagem.getDefesa();
         personagem.setDefesa(defesaAntes + valor);
 
-        System.out.println("🛡️ " + personagem.getNome() + " teve sua defesa aumentada em " + valor + "!");
+        System.out.println( personagem.getNome() + " teve sua defesa aumentada em " + valor + "!");
         System.out.println("   Defesa: " + defesaAntes + " → " + personagem.getDefesa());
         return true;
     }

@@ -18,31 +18,22 @@ public class Inventario {
         }
     }
 
-    public void removerItem(int indice) {
-        if (indice >= 0 && indice < itens.size()) {
-            Item itemRemovido = itens.remove(indice);
-            System.out.println(itemRemovido.getNome() + " removido do inventário!");
-        } else {
-            System.out.println("Índice inválido!");
+    public void removerItem(Item item) {
+        if(item == null || itens.isEmpty()) {
+            System.out.println("Item invalido! ou Inventario vazio! ");
         }
+        for (int i = 0; i < itens.size(); i++) {
+            if(itens.get(i).getNome().equals(item.getNome())) {
+                Item removido = itens.remove(i);
+                System.out.println(removido.getNome() + " removido com sucesso!");
+                return;
+            }
+        }
+        System.out.println("Item nao encontrado no inventario!");
     }
 
     public void ordenarNome() {
         Collections.sort(itens);
-    }
-
-    public void listarItens() {
-        if (itens.isEmpty()) {
-            System.out.println("Inventário vazio.");
-            return;
-        }
-
-        System.out.println("\nITENS NO INVENTÁRIO:");
-        for (int i = 0; i < itens.size(); i++) {
-            Item item = itens.get(i);
-            System.out.println( " [ " + (i+1) + " ] " + item.getNome());
-        }
-        System.out.println();
     }
 
     public void mostrarItens() {
@@ -50,40 +41,41 @@ public class Inventario {
             System.out.println("Inventário vazio.");
             return;
         }
-
-        for (int i = 0; i < itens.size(); i++) {
-            Item item = itens.get(i);
-            System.out.println("[ " + (i + 1) + " ] " + item.getNome() +
+        ArrayList<String> mostrados = new ArrayList<>();
+        int indice = 1;
+        for (Item item : itens) {
+            if (mostrados.contains(item.getNome())){
+                continue;
+            }
+            int quantidade = 0;
+            for (Item i :itens){
+                if (i.getNome().equals(item.getNome())){
+                    quantidade++;
+                }
+            }
+            System.out.println("[ " + indice + " ] " + item.getNome() + " x " + quantidade +
                     " - " + item.getDescricao() +
                     " (Efeito: " + item.getEfeito() + " +" + item.getValor() + ")");
+            indice++;
         }
     }
-
-
-    public void mostrarItensDetalhados() {
-        if (itens.isEmpty()) {
-            System.out.println("Inventário vazio.");
-            return;
-        }
-
-        System.out.println("\n===== INVENTÁRIO DETALHADO =====");
-        for (int i = 0; i < itens.size(); i++) {
-            Item item = itens.get(i);
-            System.out.println("\n[ " + (i + 1) + " ] " + item.getNome());
-            System.out.println("    Descrição: " + item.getDescricao());
-            System.out.println("    Efeito: " + item.getEfeito() + " (Valor: " + item.getValor() + ")");
-        }
-        System.out.println("===================================\n");
-    }
-
 
     public boolean estaVazio() {
         return itens.isEmpty();
     }
 
 
-    public int quantidadeItens() {
-        return itens.size();
+    public int getQuantidadeItem(Item item) {
+        if (item == null || itens.isEmpty()) {
+            return 0;
+        }
+        int quantidade = 0;
+        for (Item i:itens) {
+            if (i.getNome().equals(item.getNome())) {
+                quantidade++;
+            }
+        }
+        return quantidade;
     }
 
 
@@ -93,24 +85,6 @@ public class Inventario {
         }
         return null;
     }
-
-    public Item buscarItem(String nome) {
-        if (nome == null || nome.isBlank()) {
-            return null;
-        }
-
-        for (Item item : itens) {
-            if (item.getNome().equalsIgnoreCase(nome)) {
-                return item;
-            }
-        }
-        return null;
-    }
-
-    public boolean contemItem(String nome) {
-        return buscarItem(nome) != null;
-    }
-
 
     public void limparInventario() {
         itens.clear();

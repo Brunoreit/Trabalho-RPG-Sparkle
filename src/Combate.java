@@ -106,10 +106,11 @@ public class Combate {
                 if (item != null) {
                     usarItemEmCombate(personagem, item);
 
-                    inv.removerItem(indice);
+                    inv.removerItem(item);
                     inv.ordenarNome();
 
                     System.out.println("Item usado com sucesso!\n");
+                    System.out.println("Voce tem " + inv.getQuantidadeItem(item) + " restantes!");
                     itemUsado = true;
                 } else {
                     System.out.println("Item inválido! Tente outro.\n");
