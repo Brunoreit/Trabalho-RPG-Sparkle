@@ -107,6 +107,7 @@ public class Combate {
                     usarItemEmCombate(personagem, item);
 
                     inv.removerItem(indice);
+                    inv.ordenarNome();
 
                     System.out.println("Item usado com sucesso!\n");
                     itemUsado = true;

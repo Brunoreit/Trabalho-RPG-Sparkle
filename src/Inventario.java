@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Inventario {
     private ArrayList<Item> itens;
@@ -11,38 +12,25 @@ public class Inventario {
     public void adicionarItem(Item itemAdd) {
         if (itemAdd != null) {
             itens.add(itemAdd);
-            System.out.println("✅ " + itemAdd.getNome() + " adicionado ao inventário!");
+            System.out.println(itemAdd.getNome() + " adicionado ao inventário!");
         } else {
-            System.out.println("❌ Não é possível adicionar um item nulo!");
+            System.out.println("Não é possível adicionar um item nulo!");
         }
     }
 
-
-    public void removerItem(Item itemR) {
-        if (itemR != null && itens.contains(itemR)) {
-            itens.remove(itemR);
-            System.out.println(itemR.getNome() + " removido do inventário!");
-        } else {
-            System.out.println("Item não encontrado no inventário!");
-        }
-    }
-
-    /**
-     * Remove um item do inventário por índice
-     * @param indice Índice do item a ser removido
-     */
     public void removerItem(int indice) {
         if (indice >= 0 && indice < itens.size()) {
             Item itemRemovido = itens.remove(indice);
-            System.out.println("🗑️ " + itemRemovido.getNome() + " removido do inventário!");
+            System.out.println(itemRemovido.getNome() + " removido do inventário!");
         } else {
-            System.out.println("❌ Índice inválido!");
+            System.out.println("Índice inválido!");
         }
     }
 
-    /**
-     * Lista todos os itens do inventário (nome simples)
-     */
+    public void ordenarNome() {
+        Collections.sort(itens);
+    }
+
     public void listarItens() {
         if (itens.isEmpty()) {
             System.out.println("Inventário vazio.");
@@ -57,9 +45,6 @@ public class Inventario {
         System.out.println();
     }
 
-    /**
-     * Mostra os itens do inventário com numeração (usado no combate)
-     */
     public void mostrarItens() {
         if (itens.isEmpty()) {
             System.out.println("Inventário vazio.");
@@ -74,9 +59,7 @@ public class Inventario {
         }
     }
 
-    /**
-     * Mostra detalhes completos de todos os itens
-     */
+
     public void mostrarItensDetalhados() {
         if (itens.isEmpty()) {
             System.out.println("Inventário vazio.");

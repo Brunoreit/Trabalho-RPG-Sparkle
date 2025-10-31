@@ -5,7 +5,6 @@ public class Jogo {
     public void iniciarJogo() throws Exception {
         leitor.lerArquivo("SparkleInicio.txt");
 
-        // Pede o nome do jogador
         System.out.print("Digite o nome do seu personagem: ");
         String nomeJogador = Teclado.getUmString();
 

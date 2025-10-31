@@ -116,7 +116,7 @@ public class Item implements Comparable<Item> {
         personagem.setPontosVida(vidaMaxima);
         int vidaCurada = vidaMaxima - vidaAntes;
 
-        System.out.println("✨ " + personagem.getNome() + " teve sua vida completamente restaurada! (+" + vidaCurada + " HP)");
+        System.out.println(personagem.getNome() + " teve sua vida completamente restaurada! (+" + vidaCurada + " HP)");
         return true;
     }
 
@@ -127,7 +127,7 @@ public class Item implements Comparable<Item> {
         int ataqueAntes = personagem.getAtaque();
         personagem.setAtaque(ataqueAntes + valor);
 
-        System.out.println("⚔️ " + personagem.getNome() + " teve seu ataque aumentado em " + valor + "!");
+        System.out.println(personagem.getNome() + " teve seu ataque aumentado em " + valor + "!");
         System.out.println("   Ataque: " + ataqueAntes + " → " + personagem.getAtaque());
         return true;
     }
@@ -162,8 +162,8 @@ public class Item implements Comparable<Item> {
 
 
     @Override
-    public int compareTo(Item o) {
-        return this.getNome().compareToIgnoreCase(o.getNome());
+    public int compareTo(Item outro) {
+        return this.getNome().compareToIgnoreCase(outro.getNome());
     }
     @Override
     public boolean equals(Object obj) {
