@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public abstract class Personagem {
     private String nome;
     private int pontosVida;
@@ -136,6 +138,28 @@ public abstract class Personagem {
         this.pontosVida += quantidade;
         if (this.pontosVida > pontosVidaMaximo) {
             this.pontosVida = pontosVidaMaximo;
+        }
+    }
+
+    @Override
+    public String toString() {
+         {
+            String status = "--- STATUS: " + this.getNome() + " ---\n" +
+                    " Classe: " + this.getClass().getSimpleName() + "\n" +
+                    " Nível:  " + this.getNivel() + "\n" +
+                    " HP:     " + this.getPontosVida() + "\n" +
+                    " Ataque: " + this.getAtaque() + "\n" +
+                    " Defesa: " + this.getDefesa();
+            return status;
+        }
+    }
+
+    @Override
+    public Personagem clone(){
+        try {
+            return (Personagem) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Erro ao clonar personagem", e);
         }
     }
 }
