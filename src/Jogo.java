@@ -89,7 +89,7 @@ public class Jogo {
                     } else {
                         leitor.lerArquivo("historia/missao1_taverna.txt");
 
-                        Item paoDeMel = new Item("Pão de mel","Um pão doce que restaura 5 HP.", "cura", 5);
+                        Item paoDeMel = new Item("Pão de mel","Um pão doce que restaura 5 HP.", "CURA", 5);
                         personagemJogador.getInventario().adicionarItem(paoDeMel);
 
                         leitor.mostrarDevagar("Você ganhou 1x Pão de mel!",50);
@@ -133,7 +133,7 @@ public class Jogo {
 
         leitor.lerArquivo("historia/missao1_conversa_Nissin.txt");
 
-        Item pocao = new Item("Poção de Cura", "Restaura 20 HP.", "cura_20", 20);
+        Item pocao = new Item("Poção de Cura", "Restaura 20 HP.", "CURA", 20);
         personagemJogador.getInventario().adicionarItem(pocao);
         leitor.mostrarDevagar("Você recebeu 2x Poção de Cura!", 30);
 
@@ -189,9 +189,9 @@ public class Jogo {
                         leitor.mostrarDevagar("Você fugiu da batalha e não coletou a amostra...", 30);
                     }
 
-                    if(amostrasColetadas >= 2){
+                    if(amostrasColetadas >= 4){
                         leitor.limparTela();
-                        leitor.mostrarDevagar("Você coletou 2 amostras! Hora de voltar para a Nissin.", 30);
+                        leitor.mostrarDevagar("Você coletou 4 amostras! Hora de voltar para a Nissin.", 30);
                         leitor.mostrarDevagar("Ela te agradece e diz que vai começar a analisar...", 30);
 
                         System.out.print("\n(Pressione ENTER para concluir a missão...)");
@@ -200,7 +200,7 @@ public class Jogo {
                         momentoEscolha2 = false;
                     } else {
 
-                        int faltam = 2 - amostrasColetadas;
+                        int faltam = 4 - amostrasColetadas;
                         if (faltam > 1) {
                             leitor.mostrarDevagar("Você ainda precisa de " + faltam + " amostras.", 30);
                         } else {

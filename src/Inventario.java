@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Inventario {
-    private ArrayList<Item> itens;
+    private final ArrayList<Item> itens;
 
     public Inventario() {
         this.itens = new ArrayList<>();
@@ -44,9 +44,6 @@ public class Inventario {
         ArrayList<String> mostrados = new ArrayList<>();
         int indice = 1;
         for (Item item : itens) {
-            if (mostrados.contains(item.getNome())){
-                continue;
-            }
             int quantidade = 0;
             for (Item i :itens){
                 if (i.getNome().equals(item.getNome())){

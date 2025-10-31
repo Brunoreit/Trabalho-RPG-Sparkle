@@ -70,6 +70,11 @@ public class Item implements Comparable<Item> {
             case "CURA_COMPLETA" -> usarCuraCompleta(personagem);
             case "ATAQUE" -> usarAumentoAtaque(personagem);
             case "DEFESA" -> usarAumentoDefesa(personagem);
+
+            case "Armazenamento" -> {
+                System.out.println("Este item é para a sua missão. Não pode ser usado diretamente.");
+                yield false;
+            }
             default -> {
                 System.out.println("Efeito desconhecido: " + efeito);
                 yield false;

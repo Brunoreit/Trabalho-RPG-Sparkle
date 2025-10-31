@@ -11,7 +11,7 @@ isso tudo tem muita semelhança com os Sete Pecados que as lendas contam."
 "As pessoas tentam seguir com suas vidas, muitas vezes confiando piamente na guilda,
 mas nós não estamos conseguindo dar conta devido ao baixo número de protetores no momento...
 [PAUSE]
-"Eu preciso de você. Preciso que investigue a origem disso na floresta e traga duas amostras desses monstros para mim.
+"Eu preciso de você. Preciso que investigue a origem disso na floresta e traga quatro amostras desses monstros para mim.
 Mas você precisa estar preparado."
 [PAUSE]
 "Leve isso. Você vai precisar."

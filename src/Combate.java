@@ -16,11 +16,10 @@ public class Combate {
             mostrarStatus(personagem, inimigo);
 
 
-            boolean turnoExecutado = executarTurnoPersonagem(personagem, inimigo);
+            int turnoExecutado = executarTurnoPersonagem(personagem, inimigo);
 
-
-            if (!turnoExecutado) {
-                System.out.println("\n" + personagem.getNome() + " perdeu o turno!");
+            if (turnoExecutado == 0) {
+                return 0;
             }
 
             if (inimigo.getPontosVida() <= 0) {
@@ -29,7 +28,8 @@ public class Combate {
                 personagem.ganharExperiencia(inimigo.getXpRecompensa());
                 break;
             }
-
+            System.out.println("Pressione ENTER para continuar...");
+            Teclado.getUmString();
             executarAtaqueInimigo(inimigo, personagem);
 
             if (personagem.getPontosVida() <= 0) {
@@ -43,65 +43,72 @@ public class Combate {
         return mostrarResultado(personagem, inimigo);
     }
 
-    private boolean executarTurnoPersonagem(Personagem personagem, Inimigo inimigo) {
-        System.out.println("\n=== SUA VEZ, " + personagem.getNome() + "! ===");
-        System.out.println("[ 1 ] Atacar");
-        System.out.println("[ 2 ] Usar Item");
-        System.out.println("[ 3 ] Fugir");
-        System.out.print("Escolha sua ação: ");
+    private int executarTurnoPersonagem(Personagem personagem, Inimigo inimigo) {
+        while (true) {
+            System.out.println("\n=== SUA VEZ, " + personagem.getNome() + "! ===");
+            System.out.println("[ 1 ] Atacar");
+            System.out.println("[ 2 ] Usar Item");
+            System.out.println("[ 3 ] Fugir");
+            System.out.print("Escolha sua ação: ");
 
-        String escolha = Teclado.getUmString();
+            String escolha = Teclado.getUmString();
 
-        switch (escolha) {
-            case "1":
-                executarAtaque(personagem, inimigo);
-                break;
-            case "2":
-                usarItem(personagem);
-                break;
-            case "3":
-                fugirCombate(personagem, inimigo);
-                break;
-            default:
-                System.out.println("\nOpção inválida! Tente novamente.\n");
+            switch (escolha) {
+                case "1":
+                    executarAtaque(personagem, inimigo);
+                    return 1;
 
+                case "2":
+                    boolean itemFoiUsado = usarItem(personagem, inimigo);
+                    if(itemFoiUsado){
+                        return 1;
+                    }
+                    break;
+
+                case "3":
+                    boolean fugiu = fugirCombate(personagem, inimigo);
+                    if(fugiu){
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+
+                default:
+                    System.out.println("\nOpção inválida! Tente novamente.\n");
+            }
         }
-        return true;
     }
 
 
 
 
-    private void usarItem(Personagem personagem) {
+    private boolean usarItem(Personagem personagem, Inimigo inimigo) {
         Inventario inv = personagem.getInventario();
-
         while (inv.estaVazio()) {
             System.out.println("Seu inventário está vazio!");
             System.out.println("Digite 0 para voltar e escolher atacar: ");
             String opcao = Teclado.getUmString();
-            if (opcao.equals("0")) {
 
-                return;
+            if (opcao.equals("0")) {
+                return false;
             }
         }
 
-        boolean itemUsado = false;
-        while (!itemUsado) {
+        while (true) {
             System.out.println("\n=== INVENTÁRIO ===");
-
             inv.mostrarItens();
-
             System.out.print("\nDigite o número do item que deseja usar (0 para voltar): ");
             String escolhaItem = Teclado.getUmString();
 
             if (escolhaItem.equals("0")) {
                 System.out.println("Voltando ao menu...\n");
-                return;
+                return false;
             }
 
             try {
                 int indice = Integer.parseInt(escolhaItem) - 1;
                 Item item = inv.getItem(indice);
+
 
                 if (item != null) {
                     usarItemEmCombate(personagem, item);
@@ -111,7 +118,7 @@ public class Combate {
 
                     System.out.println("Item usado com sucesso!\n");
                     System.out.println("Voce tem " + inv.getQuantidadeItem(item) + " restantes!");
-                    itemUsado = true;
+                    return true;
                 } else {
                     System.out.println("Item inválido! Tente outro.\n");
                 }
@@ -157,15 +164,17 @@ public class Combate {
         System.out.println();
     }
 
-    private void fugirCombate(Personagem atacante, Personagem defensor) {
+    private boolean fugirCombate(Personagem atacante, Personagem defensor) {
         int valorDado = rolarDado();
         System.out.println(valorDado);
         if (valorDado > 10) {
             System.out.println(atacante.getNome() + "Fugiu Com Sucesso de " +defensor.getNome() + "!");
+            return true;
         }
         else {
             System.out.println(atacante.getNome() + "Não Conseguiu Fugir dos Ataques de'" + defensor.getNome() + "'!");
             System.out.println("Vez Do Inimigo!");
+            return false;
         }
     }
     private void executarAtaqueInimigo(Inimigo inimigo, Personagem personagem) {
@@ -205,7 +214,8 @@ public class Combate {
             System.out.println("A defesa de " + personagem.getNome() + " bloqueou o ataque!");
         }
 
-        System.out.println();
+        System.out.print("\n(Pressione ENTER para continuar...)");
+        Teclado.getUmString();
     }
 
 
@@ -233,15 +243,10 @@ public class Combate {
             System.out.println("Experiencia recebida " + inimigo.getXpRecompensa());
             System.out.println("Experiencia restante para subir de nivel: " + personagem.getExperienciaProximoNivel());
             return 1;
-        } else if (personagem.getPontosVida() < 0) {
+        } else {
             System.out.println("DERROTA! " + personagem.getNome() + " foi derrotado por " + inimigo.getNome() + "...");
             return -1;
         }
-        else {
-            System.out.print(" FUGIU! ");
-            return 0;
-        }
-
     }
 
     private void pausar() {
