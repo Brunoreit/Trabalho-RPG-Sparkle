@@ -1,21 +1,23 @@
 public abstract class Personagem {
     private String nome;
     private int pontosVida;
+    private int pontosVidaMaximo;
     private int ataque;
-    private int defensa;
+    private int defesa;
     private int nivel;
     private Inventario inventario;
 
     public Personagem(String nome, int pontosVida, int ataque, int defesa, int nivel, Inventario inventario) throws Exception{
-        this.setNome(nome);
+        this.setNome(nome);  // ← MUDOU DE getNome() PARA setNome()
         this.setPontosVida(pontosVida);
+        this.pontosVidaMaximo = pontosVida;
         this.setAtaque(ataque);
         this.setDefesa(defesa);
         this.setNivel(nivel);
         this.setInventario(inventario);
-
     }
 
+    // SETTER para o nome (era getNome, agora é setNome)
     public void setNome(String nome) throws Exception{
         if (nome == null) throw new Exception("Nome não pode ser nulo!");
 
@@ -31,7 +33,6 @@ public abstract class Personagem {
             if(Character.isLetter(c)) continue;
 
             if(c == ' ' || c == '-' || c == '\'' ){
-
                 if(i == nome.length()-1) throw new Exception("Não pode ter espaço, hífen e apóstrofo ao final do nome!");
                 char proximo = nome.charAt(i + 1);
                 if(!Character.isLetter(proximo)) throw new Exception("Não pode ter separadores um seguido do outro no nome!");
@@ -42,9 +43,50 @@ public abstract class Personagem {
         this.nome = nome;
     }
 
-    public void setPontosVida(int pontosVida){}
-    public void setAtaque(int ataque){}
-    public void setDefesa(int defensa){}
-    public void setNivel(int nivel){};
-    public void setInventario(Inventario inventario){}
+    // GETTER para o nome (retorna o valor)
+    public String getNome() {
+        return nome;
+    }
+
+    public void setPontosVida(int pontosVida){
+        this.pontosVida = pontosVida;
+    }
+
+    public int getPontosVida(){
+        return pontosVida;
+    }
+    public int getPontosVidaMaximo() {
+        return pontosVidaMaximo;
+    }
+    public void setAtaque(int ataque){
+        this.ataque = ataque;
+    }
+
+    public int getAtaque(){
+        return ataque;
+    }
+
+    public void setDefesa(int defesa){
+        this.defesa = defesa;
+    }
+
+    public int getDefesa(){
+        return defesa;
+    }
+
+    public void setNivel(int nivel){
+        this.nivel = nivel;
+    }
+
+    public int getNivel(){
+        return nivel;
+    }
+
+    public void setInventario(Inventario inventario){
+        this.inventario = inventario;
+    }
+
+    public Inventario getInventario(){
+        return inventario;
+    }
 }
