@@ -137,7 +137,7 @@ public class Jogo {
         personagemJogador.getInventario().adicionarItem(pocao);
         leitor.mostrarDevagar("Você recebeu 2x Poção de Cura!", 30);
 
-        Item tubo_ensaio = new Item("Tubo de ensaio","Um tubo feito de vidro que pode guardar líquidos e essências","Armazenamento",0);
+        Item tubo_ensaio = new Item("Tubo de ensaio","Um tubo feito de vidro que pode guardar líquidos e essências","ARMAZENAMENTO",0);
         personagemJogador.getInventario().adicionarItem(tubo_ensaio);
         leitor.mostrarDevagar("Você recebeu 1x Tubo de ensaio!", 30);
 
@@ -159,7 +159,7 @@ public class Jogo {
             switch (escolhaMissao) {
                 case "1":
                     leitor.limparTela();
-                    if (new Random().nextInt(4) == 0) {
+                    if (new Random().nextInt(3) == 0) {
                         leitor.mostrarDevagar("Você pisa em uma armadilha de espinhos!", 30);
                         int dano = 5;
                         personagemJogador.setPontosVida(personagemJogador.getPontosVida() - dano);
@@ -261,14 +261,14 @@ public class Jogo {
             Item item = inv.getItem(indice);
 
             if (item != null) {
-                item.usar(personagemJogador);
+                boolean foiUsado = item.usar(personagemJogador);
+                if (foiUsado) {
+                    inv.removerItem(item);
+                    leitor.mostrarDevagar("Item " + item.getNome() + " usado com sucesso!", 30);
+                    leitor.mostrarDevagar(personagemJogador.toString(), 30);
+                } else{
 
-                inv.removerItem(item);
-
-                leitor.mostrarDevagar("Item " + item.getNome() + " usado com sucesso!", 30);
-
-                leitor.mostrarDevagar(personagemJogador.toString(), 30);
-
+                }
             } else {
                 leitor.mostrarDevagar("Item inválido!", 30);
             }
